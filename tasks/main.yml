@@ -1,0 +1,32 @@
+---
+- name: create required directories
+  file: state=directory name={{ item }}
+  with_items:
+      - /root/statsdaemon-d8d
+      - "{{ ext_statsdaemon_volume }}/conf"
+      - "{{ ext_statsdaemon_volume }}/log"
+
+- name: put Dockerfile
+  template: src=Dockerfile dest=/root/statsdaemon-d8d/Dockerfile
+
+- name: put binary
+  copy: src=statsdaemon.tgz dest=/root/statsdaemon-d8d/ mode=0755
+
+- set_fact:
+     image_build_name: gitinsky/statsdaemon
+     image_build_path: /root/statsdaemon-d8d
+
+- include: ansible-tasks-docker-image/image_build.yml
+
+- name: start an statsdaemon container
+  docker:
+    image: gitinsky/statsdaemon:latest
+    state: reloaded
+    hostname: "statsdaemon-{{ ansible_hostname }}"
+    dns: "{{ docker_dns_servers }}"
+    expose:
+      - "{{ statsdaemon_port }}"
+    ports:
+        - "{{ statsdaemon_port }}:{{ statsdaemon_port }}"
+    name: statsdaemon
+    restart_policy: always
