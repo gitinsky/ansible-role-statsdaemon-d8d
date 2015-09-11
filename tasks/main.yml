@@ -27,6 +27,6 @@
     expose:
       - "{{ statsdaemon_port }}/udp"
     ports:
-        - "{{ statsdaemon_port }}:{{ statsdaemon_port }}"
+        - "{{ statsdaemon_port }}:{{ statsdaemon_port }}/udp"
     name: statsdaemon
     restart_policy: always
