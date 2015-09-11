@@ -11,5 +11,5 @@ rm -v statsdaemon
 ### Manual run with default settings
 
 ```bash
-docker run --rm -p 8125:8125 -ti gitinsky/statsdaemon statsdaemon -graphite='-' -opentsdb=172.17.42.1:4242
+docker run --rm -p 8125:8125/udp -ti gitinsky/statsdaemon statsdaemon -graphite='-' -opentsdb=172.17.42.1:4242
 ```

@@ -25,7 +25,7 @@
     hostname: "statsdaemon-{{ ansible_hostname }}"
     dns: "{{ docker_dns_servers }}"
     expose:
-      - "{{ statsdaemon_port }}"
+      - "{{ statsdaemon_port }}/udp"
     ports:
         - "{{ statsdaemon_port }}:{{ statsdaemon_port }}"
     name: statsdaemon
