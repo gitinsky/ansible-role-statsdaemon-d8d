@@ -3,6 +3,6 @@ MAINTAINER Git In Sky <support@gitinsky.com>
 
 ADD statsdaemon.tgz /bin/
 
-EXPOSE {{ statsdaemon_port }}
+EXPOSE 8125
 
-CMD [ "/bin/statsdaemon", "-graphite={{ graphite_address }}", "-opentsdb={{ opentsdb_address }}"]
+CMD [ "/bin/statsdaemon", "-graphite=-", "-opentsdb=172.17.42.1:4242"]

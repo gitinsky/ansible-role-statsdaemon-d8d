@@ -20,6 +20,7 @@
 
 - name: start an statsdaemon container
   docker:
+    command: /bin/statsdaemon -graphite={{ graphite_address }} -opentsdb={{ opentsdb_address }}
     image: gitinsky/statsdaemon:latest
     state: reloaded
     hostname: "statsdaemon-{{ ansible_hostname }}"
@@ -27,6 +28,6 @@
     expose:
       - "{{ statsdaemon_port }}/udp"
     ports:
-        - "{{ statsdaemon_port }}:{{ statsdaemon_port }}/udp"
+        - "{{ statsdaemon_listen_address + ':' if statsdaemon_listen_address is defined else '' }}{{ statsdaemon_port }}:{{ statsdaemon_port }}/udp"
     name: statsdaemon
     restart_policy: always
