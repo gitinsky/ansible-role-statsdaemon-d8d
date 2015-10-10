@@ -1,5 +1,0 @@
-ext_statsdaemon_volume: /var/lib/docker-extvols/statsdaemon
-statsdaemon_port: 8125
-docker_dns_servers: []
-graphite_address: "-"
-opentsdb_address: "{{ ansible_docker0.ipv4.address }}:4242"
