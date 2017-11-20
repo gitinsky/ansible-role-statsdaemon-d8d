@@ -14,4 +14,4 @@
      image_build_name: gitinsky/statsdaemon
      image_build_path: /root/statsdaemon-d8d
 
-- include: ansible-tasks-docker-image/image_build.yml
+- include_tasks: ansible-tasks-docker-image/image_build.yml
